@@ -6,7 +6,6 @@ __version__ = "0.0.2"
 
 _LOGGER = logging.getLogger(__name__)
 
-
 def parse(device):
     mfd = device.get("ManufacturerData")
     # 220 is Procter & Gamble
@@ -23,6 +22,7 @@ def parse(device):
     mfd = [int(x) for x in mfd[PG]]
     _LOGGER.debug("mfd: %s", mfd)
 
+    # https://github.com/rfaelens/domotica/blob/master/mqtt-toothbrush.py
     return dict(
         running=mfd[3],
         pressure=mfd[4],
