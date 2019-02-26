@@ -12,7 +12,6 @@ setup(
     author_email="error.errorsson@gmail.com",
     scripts=["toothbrush"],
     py_modules=["toothbrush"],
-    scripts=["toothbrush"],
     packages=[],
     install_requires=list(open("requirements.txt").read().strip().split("\n")),
     extras_require={"console": ["docopt"]},
