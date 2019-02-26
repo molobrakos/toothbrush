@@ -36,3 +36,6 @@ Oral-B Toothbrush 11:22:33:44:55:66
 > toothbrush monitor 11:22:33:44:55:66 | mosquitto_pub -l -t /toothbrush
 
 ```
+
+## credits
+Inspired by https://github.com/rfaelens/domotica/blob/master/mqtt-toothbrush.py
