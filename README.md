@@ -19,4 +19,20 @@ Options:
   -h --help             Show this message
   -v,-vv                Increase verbosity
   --version             Show version
+
+> toothbrush scan
+Oral-B Toothbrush 11:22:33:44:55:66
+^C
+
+> toothbrush monitor 11:22:33:44:55:66
+{"running": 2, "pressure": 32, "time": 0, "mode": 7, "quadrant": 1}
+{"running": 2, "pressure": 32, "time": 0, "mode": 7, "quadrant": 1}
+{"running": 2, "pressure": 32, "time": 0, "mode": 7, "quadrant": 1}
+{"running": 2, "pressure": 32, "time": 0, "mode": 7, "quadrant": 1}
+{"running": 2, "pressure": 32, "time": 0, "mode": 7, "quadrant": 1}
+{"running": 2, "pressure": 32, "time": 0, "mode": 7, "quadrant": 1}
+^C
+
+> toothbrush monitor 11:22:33:44:55:66 | mosquitto_pub -l -t /toothbrush
+
 ```
