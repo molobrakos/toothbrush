@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name="toothbrush",
-    version="0.0.2",
+    version="0.0.3",
     description="Receive BLE packets from Oral-B toothbrushC",
     url="https://github.com/molobrakos/toothbrush",
     license="",
