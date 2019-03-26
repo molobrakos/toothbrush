@@ -35,6 +35,8 @@ _LOGGER = logging.getLogger(__name__)
 LOGFMT = "%(asctime)s %(levelname)5s (%(threadName)s) [%(name)s] %(message)s"
 DATEFMT = "%y-%m-%d %H:%M.%S"
 
+TOOTHBRUSH_ID = "Oral-B"
+
 
 def main():
     """Command line interface."""
@@ -65,16 +67,19 @@ def main():
         _LOGGER.info("Debug is on")
 
     class Observer(blus.DeviceObserver):
+        def discovered(self, path, device):
+            pass
+
         def seen(self, path, device):
             alias = device.get("Alias")
             _LOGGER.info("Seeing %s", alias)
 
-            if "Oral-B" not in alias:
+            if TOOTHBRUSH_ID not in alias:
                 return
 
             if args["-d"]:
                 for k, v in device.items():
-                    _LOGGER.debug("  %12s = %s", k, v)
+                    _LOGGER.debug("%12s = %s", k, v)
 
             if args["scan"]:
                 print(device.get("Name"), device.get("Address"))
@@ -82,7 +87,7 @@ def main():
                 print(json.dumps(parse(device)))
 
     try:
-        blus.scan(Observer())
+        blus.scan(blus.DeviceManager(Observer()), transport="le")
     except KeyboardInterrupt:
         _LOGGER.info("Exiting")
 
