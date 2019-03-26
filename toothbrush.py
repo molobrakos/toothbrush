@@ -6,6 +6,7 @@ __version__ = "0.0.2"
 
 _LOGGER = logging.getLogger(__name__)
 
+
 def parse(device):
     mfd = device.get("ManufacturerData")
 
@@ -13,8 +14,8 @@ def parse(device):
         _LOGGER.debug("no manufacturer data")
         return
 
-    # 0xdc=220 is Procter & Gamble
-    # ref: https://www.bluetooth.com/specifications/assigned-numbers/company-identifiers
+    # 0xdc=220 is P&G
+    # https://www.bluetooth.com/specifications/assigned-numbers/company-identifiers
     PG = 0xdc
 
     if PG not in mfd:
@@ -24,7 +25,7 @@ def parse(device):
     mfd = [int(x) for x in mfd[PG]]
     _LOGGER.debug("mfd: %s", mfd)
 
-    # ref: https://github.com/rfaelens/domotica/blob/master/mqtt-toothbrush.py
+    # https://github.com/rfaelens/domotica/blob/master/mqtt-toothbrush.py
     return dict(
         # battery?
         running=mfd[3],
