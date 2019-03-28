@@ -68,8 +68,6 @@ def main():
         _LOGGER.info("Debug is on")
 
     class Observer(blus.DeviceObserver):
-        def discovered(self, manager, path, device):
-            pass
 
         def seen(self, manager, path, device):
             alias = device.get("Alias")
