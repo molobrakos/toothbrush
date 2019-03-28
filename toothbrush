@@ -62,17 +62,19 @@ def main():
         )
 
     logging.captureWarnings(debug)
+    logging.getLogger("blus.scan").setLevel(logging.INFO)
 
     if debug:
         _LOGGER.info("Debug is on")
 
     class Observer(blus.DeviceObserver):
-        def discovered(self, path, device):
+        def discovered(self, manager, path, device):
             pass
 
-        def seen(self, path, device):
+        def seen(self, manager, path, device):
             alias = device.get("Alias")
-            _LOGGER.info("Seeing %s", alias)
+
+            # _LOGGER.info("Seeing %s", alias)
 
             if TOOTHBRUSH_ID not in alias:
                 return
@@ -87,7 +89,7 @@ def main():
                 print(json.dumps(parse(device)), flush=True)
 
     try:
-        blus.scan(blus.DeviceManager(Observer()), transport="le")
+        blus.DeviceManager(Observer()).scan(transport="le")
     except KeyboardInterrupt:
         _LOGGER.info("Exiting")
 
